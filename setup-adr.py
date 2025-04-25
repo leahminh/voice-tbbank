@@ -1,5 +1,7 @@
 import sys
 import subprocess
+import shutil
+import platform
 
 # Kiểm tra phiên bản Python >= 3.12.9
 REQUIRED_PYTHON = (3, 12, 9)
@@ -25,19 +27,31 @@ except ImportError:
 from colorama import init, Fore
 init(autoreset=True)
 
-# ✅ Chỉ giữ lại các thư viện cần cài qua pip
+# ✅ Thư viện pip cần cài
 REQUIRED_PACKAGES = [
     "requests", "pystyle", "gspread", "oauth2client", "gtts"
 ]
 
+# ✅ Gói pkg cần cài trên Termux
+TERMUX_PACKAGES = ["mpv"]
+
 def install_libraries():
-    print(Fore.CYAN + "📦 Đang cài đặt các thư viện...")
+    print(Fore.CYAN + "📦 Đang cài đặt các thư viện qua pip...")
     for lib in REQUIRED_PACKAGES:
-        print(Fore.BLUE + f"🔄 Cài: {lib}...")
+        print(Fore.BLUE + f"🔄 Cài pip: {lib}...")
         subprocess.run([sys.executable, "-m", "pip", "install", "--upgrade", lib], check=True)
-    print(Fore.GREEN + "✅ Tất cả thư viện đã được cài.")
+    print(Fore.GREEN + "✅ Các thư viện pip đã cài xong.")
+
+def install_termux_packages():
+    if "Android" in platform.uname().release or "termux" in sys.executable.lower():
+        print(Fore.CYAN + "📦 Đang cài các gói cần thiết qua pkg...")
+        for pkg in TERMUX_PACKAGES:
+            print(Fore.BLUE + f"🔄 Cài pkg: {pkg}...")
+            subprocess.run(["pkg", "install", "-y", pkg], check=True)
+        print(Fore.GREEN + "✅ Các gói pkg đã cài xong.")
 
 if __name__ == "__main__":
     install_libraries()
+    install_termux_packages()
     print(Fore.MAGENTA + "🎉 Setup hoàn tất!")
     sys.exit()
