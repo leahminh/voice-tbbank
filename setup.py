@@ -27,7 +27,7 @@ init(autoreset=True)
 
 # Danh sách các thư viện cần thiết
 REQUIRED_PACKAGES = [
-    "time", "os", "sys", "requests", "datetime", "pystyle", "gspread", "oauth2client", "gtts",
+    "os", "sys", "requests", "datetime", "pystyle", "gspread", "oauth2client", "gtts",
     "platform", "io"
 ]
 
@@ -42,4 +42,3 @@ if __name__ == "__main__":
     install_libraries()
     print(Fore.MAGENTA + "🎉 Setup hoàn tất!")
     sys.exit()
-
