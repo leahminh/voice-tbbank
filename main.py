@@ -4,12 +4,75 @@ from gtts import gTTS
 from io import BytesIO
 import os
 import time
+import sys
+import requests
+from time import sleep
+from datetime import datetime, timedelta
+from pystyle import Colors, Colorate
 
-# --- Hàm phát âm thanh từ link (ting ting) ---
+# Kiểm tra kết nối mạng
+def check_connection():
+    try:
+        response = requests.get("https://www.google.com.vn", timeout=3)
+        if response.status_code != 200:
+            raise Exception("Phản hồi không hợp lệ")
+        print("Đã kết nối mạng thành công!")
+    except (requests.exceptions.ReadTimeout, requests.ConnectionError, requests.exceptions.RequestException, Exception):
+        print("░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░")
+        print("░░██╗░░░░░░█████╗░███╗░░░███╗██████╗░███████╗██╗░░░░░██╗░")
+        print("░░██║░░░░░██╔══██╗████╗░████║██╔══██╗██╔════╝╚██╗░░░██╔╝░")
+        print("░░██║░░░░░███████║██╔████╔██║██║░░██║█████╗░░░╚██╗░██╔╝░░")
+        print("░░██║░░░░░██╔══██║██║╚██╔╝██║██║░░██║██╔══╝░░░░╚████╔╝░░░")
+        print("░░███████╗██║░░██║██║░╚═╝░██║██████╔╝███████╗░░░╚██╔╝░░░░")
+        print("░░╚══════╝╚═╝░░╚═╝╚═╝░░░░░╚═╝╚═════╝░╚══════╝░░░░╚═╝░░░░░")
+        print("░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n")
+        print("TOOL BY:LeAnhMinh - LAMDev              PHIÊN BẢN : 1.0.0")
+        print("════════════════════════════════════════════════  ")
+        print("Không có kết nối mạng hoặc kết nối mạng không ổn định")
+        print("Vui lòng kiểm tra kết nối mạng rồi thử lại")
+        print("════════════════════════════════════════════════  ")
+        sys.exit()  # Dừng chương trình nếu không có mạng
+
+# Kiểm tra kết nối mạng khi bắt đầu chạy
+check_connection()
+
+# Phần còn lại của tool sẽ chạy bình thường nếu có mạng
+print("Tool đang chạy bình thường...")
+
+# Hàm banner
+def banner():
+    banner = f"""
+░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+░░██╗░░░░░░█████╗░███╗░░░███╗██████╗░███████╗██╗░░░░░██╗░
+░░██║░░░░░██╔══██╗████╗░████║██╔══██╗██╔════╝╚██╗░░░██╔╝░
+░░██║░░░░░███████║██╔████╔██║██║░░██║█████╗░░░╚██╗░██╔╝░░
+░░██║░░░░░██╔══██║██║╚██╔╝██║██║░░██║██╔══╝░░░░╚████╔╝░░░
+░░███████╗██║░░██║██║░╚═╝░██║██████╔╝███████╗░░░╚██╔╝░░░░
+░░╚══════╝╚═╝░░╚═╝╚═╝░░░░░╚═╝╚═════╝░╚══════╝░░░░╚═╝░░░░░
+░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+TOOL BY:LeAnhMinh - LAMDev              PHIÊN BẢN : 1.0.0
+═════════════════════════════════════════════════════════
+[</>] BOX ZALO : 
+═════════════════════════════════════════════════════════ 
+[</>] GIỚI HẠN THIẾT BỊ : 1 🚦
+[</>] NGƯỜI MUA : USER.....
+[</>] KEY : LAMDev*********
+═════════════════════════════════════════════════════════                              
+"""
+
+    for X in banner:
+        sys.stdout.write(X)
+        sys.stdout.flush()
+        sleep(0.00125)
+os.system("cls" if os.name == "nt" else "clear")
+banner()
+
+# Hàm phát âm thanh từ link
 def play_sound_from_url(url):
     os.system(f"mpv --no-video {url}")
 
-# --- Hàm đọc thông tin thời gian giao dịch và số tiền ---
+# Hàm đọc thông tin thời gian giao dịch và số tiền
 def noi(text, transaction_time, so_tien):
     try:
         # Phát tiếng ting trước
@@ -45,7 +108,7 @@ def noi(text, transaction_time, so_tien):
     except Exception as e:
         print("❌ Lỗi đọc:", e)
 
-# --- Kết nối Google Sheet ---
+# Kết nối Google Sheet
 scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
 creds = ServiceAccountCredentials.from_json_keyfile_name('credentials.json', scope)
 client = gspread.authorize(creds)
@@ -53,17 +116,17 @@ client = gspread.authorize(creds)
 sheet_url = 'https://docs.google.com/spreadsheets/d/1yjfFXVNjxd6Gdady8Dk5GugA3W5cB0uXCcu7Ymoi7AE/edit#gid=0'
 sheet = client.open_by_url(sheet_url).sheet1
 
-# --- Đọc mã giao dịch cuối cùng từ file ---
+# Đọc mã giao dịch cuối cùng từ file
 last_ma_gd = None
 try:
-    with open("last.txt", "r") as f:
+    with open("LAMDev.txt", "r") as f:
         last_ma_gd = f.read().strip()
 except FileNotFoundError:
-    print("⚠️ Không tìm thấy file last.txt, sẽ bắt đầu từ đầu.")
+    print("⚠️ Không tìm thấy file LAMDev.txt, sẽ bắt đầu từ đầu.")
 
 print("🔄 Đang theo dõi giao dịch mới...")
 
-# --- Vòng lặp kiểm tra ---
+# Vòng lặp kiểm tra
 while True:
     try:
         data = sheet.get_all_records(head=2)  # Dòng tiêu đề là dòng 2
@@ -81,12 +144,12 @@ while True:
                     print(f"✅ Giao dịch mới:\n- Mã Giao Dịch: {ma_gd}\n- {so_tien} VND\n- Thời gian: {transaction_time}\n- Nội Dung : {noidung}")
                     last_ma_gd = ma_gd
 
-                    # --- Lưu mã giao dịch mới vào file ---
-                    with open("last.txt", "w") as f:
+                    # Lưu mã giao dịch mới vào file
+                    with open("LAMDev.txt", "w") as f:
                         f.write(ma_gd)
                 break
     except Exception as e:
         print("❌ Lỗi:", e)
         time.sleep(10)  # Nếu có lỗi, chờ một chút rồi thử lại
 
-    time.sleep(5)  # kiểm tra mỗi 5 giây
+    time.sleep(5)  # Kiểm tra mỗi 5 giây
