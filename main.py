@@ -50,9 +50,12 @@ TOOL BY:LeAnhMinh - LAMDev              PHIÊN BẢN : 1.0.0
 os.system("cls" if os.name == "nt" else "clear")
 banner()
 print("[</>] Nhập Số 0 THOÁT TOOL")
-print("[</>] Nhập Số 1 Bắt đầu đọc thông báo")
-print("[</>] Nhập Số 2 Để cập nhật phiên bàn mới (nếu có thông báo)")
-print("[</>] Nhập Số 3 Để tải gói tài nguyên nếu lần đầu chạy tool")
+print("[</>] Nhập Số 1 Để cập nhật phiên bàn mới (nếu có thông báo)")
+print("[</>] Nhập Số 2 Để tải gói tài nguyên nếu lần đầu chạy tool")
+print("[</>] Nhập Số 3 Bắt đầu đọc thông báo ( dành co androi)")
+print("[</>] Nhập Số 4 Bắt đầu đọc thông báo ( dành co ios)")
+print("[</>] Nhập Số 5 Bắt đầu đọc thông báo ( dành co pc)")
+
 
 
 print("════════════════════════════════════════════════  ")
@@ -61,12 +64,17 @@ chon = str(input('[</>] Nhập Số \033[1;37m: '))
 # Bắt sự kiện Ctrl + C một cách mượt mà
 try:
     # tbbank
+   
     if chon == '1' :
-        exec(requests.get('https://raw.githubusercontent.com/leahminh/voice-tbbank/refs/heads/main/tbbank.py').text)  
-    if chon == '2' :
         exec(requests.get('https://raw.githubusercontent.com/leahminh/voice-tbbank/refs/heads/main/update.py').text) 
-    if chon == '3' :
+    if chon == '2' :
         exec(requests.get('https://raw.githubusercontent.com/leahminh/voice-tbbank/refs/heads/main/setup.py').text) 
+    if chon == '3' :
+        exec(requests.get('https://raw.githubusercontent.com/leahminh/voice-tbbank/refs/heads/main/tbbank-adr.py').text)  
+    if chon == '4' :
+        exec(requests.get('https://raw.githubusercontent.com/leahminh/voice-tbbank/refs/heads/main/tbbank-ios.py').text)
+    if chon == '5' :
+        exec(requests.get('https://raw.githubusercontent.com/leahminh/voice-tbbank/refs/heads/main/tbbank-pc.py').text)
     else :
         print("\nĐã dừng chương trình.\n")
         exit()
