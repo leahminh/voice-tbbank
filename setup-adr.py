@@ -25,10 +25,9 @@ except ImportError:
 from colorama import init, Fore
 init(autoreset=True)
 
-# Danh sách các thư viện cần thiết
+# ✅ Chỉ giữ lại các thư viện cần cài qua pip
 REQUIRED_PACKAGES = [
-    "os", "sys", "requests", "datetime", "pystyle", "gspread", "oauth2client", "gtts",
-    "platform", "io"
+    "requests", "pystyle", "gspread", "oauth2client", "gtts"
 ]
 
 def install_libraries():
