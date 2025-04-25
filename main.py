@@ -51,7 +51,8 @@ os.system("cls" if os.name == "nt" else "clear")
 banner()
 print("[</>] Nhập Số 0 THOÁT TOOL")
 print("[</>] Nhập Số 1 Bắt đầu đọc thông báo")
-print("[</>] Nhập Số 2 Để cập nhật nếu bị lỗi")
+print("[</>] Nhập Số 2 Để cập nhật phiên bàn mới (nếu có thông báo)")
+print("[</>] Nhập Số 3 Để tải gói tài nguyên nếu lần đầu chạy tool")
 
 
 print("════════════════════════════════════════════════  ")
@@ -59,11 +60,15 @@ chon = str(input('[</>] Nhập Số \033[1;37m: '))
 
 # Bắt sự kiện Ctrl + C một cách mượt mà
 try:
-    # buff tiktok
+    # tbbank
     if chon == '1' :
-        exec(requests.get('https://raw.githubusercontent.com/leahminh/voice-tbbank/main/main.py').text)    
+        exec(requests.get('https://raw.githubusercontent.com/leahminh/voice-tbbank/refs/heads/main/tbbank.py').text)  
+    if chon == '2' :
+        exec(requests.get('https://raw.githubusercontent.com/leahminh/voice-tbbank/refs/heads/main/update.py').text) 
+    if chon == '3' :
+        exec(requests.get('https://raw.githubusercontent.com/leahminh/voice-tbbank/refs/heads/main/setup.py').text) 
     else :
-        print("Tool đã dừng lại")
+        print("\nĐã dừng chương trình.\n")
         exit()
 except KeyboardInterrupt:
     # Xử lý khi nhấn Ctrl + C
