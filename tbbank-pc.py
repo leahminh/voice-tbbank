@@ -11,6 +11,7 @@ from datetime import datetime
 from playsound import playsound
 from pystyle import Colors, Colorate
 import platform
+import pygame  # Thêm dòng này để nhập khẩu pygame
 
 # --- Hàm xóa màn hình ---
 def clear_screen():
