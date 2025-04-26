@@ -49,18 +49,25 @@ Tool by: Lê Anh Minh - LAMDev              Version: 1.0.0
 
 banner()
 
-# --- Phát âm thanh từ file ---
-def play_sound_file(filepath):
+# --- Phát âm thanh từ URL ---
+def play_sound_from_url(url):
     try:
-        playsound(filepath)
+        # Tải âm thanh từ URL
+        response = requests.get(url)
+        audio_data = BytesIO(response.content)
+        
+        # Khởi tạo pygame mixer và phát âm thanh
+        pygame.mixer.init()
+        pygame.mixer.music.load(audio_data)
+        pygame.mixer.music.play()
     except Exception as e:
         print(f"❌ Lỗi phát âm thanh: {e}")
 
 # --- TTS ---
 def noi(text, time_str, so_tien, noidung):
     try:
-        # Phát tiếng ting
-        playsound("ting.mp3")
+        # Phát tiếng ting từ URL
+        play_sound_from_url("https://tiengdong.com/wp-content/uploads/Tieng-tinh-tinh-www_tiengdong_com.mp3")
 
         # Tạo file tạm TTS
         hour, minute, *_ = time_str.split()[1].split(":")
