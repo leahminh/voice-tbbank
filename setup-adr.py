@@ -1,57 +1,43 @@
 import sys
 import subprocess
-import shutil
-import platform
+from colorama import init, Fore
 
-# Kiểm tra phiên bản Python >= 3.12.9
+init(autoreset=True)
+
 REQUIRED_PYTHON = (3, 12, 9)
 if sys.version_info < REQUIRED_PYTHON:
-    sys.exit(f"❌ Python {REQUIRED_PYTHON[0]}.{REQUIRED_PYTHON[1]}.{REQUIRED_PYTHON[2]} trở lên là bắt buộc!")
+    sys.exit(f"❌ Yêu cầu Python {REQUIRED_PYTHON[0]}.{REQUIRED_PYTHON[1]}.{REQUIRED_PYTHON[2]} trở lên!")
 
 # Cài pip nếu chưa có
 def ensure_pip():
     try:
         import pip
     except ImportError:
-        print("⚠️ pip chưa được cài, đang tiến hành cài đặt...")
+        print(Fore.YELLOW + "⚠️ pip chưa có, đang cài…")
         subprocess.run([sys.executable, "-m", "ensurepip", "--default-pip"], check=True)
 
-ensure_pip()
-
-# Cài colorama trước để in màu
-try:
-    import colorama
-except ImportError:
-    subprocess.run([sys.executable, "-m", "pip", "install", "colorama"], check=True)
-
-from colorama import init, Fore
-init(autoreset=True)
-
-# ✅ Thư viện pip cần cài
-REQUIRED_PACKAGES = [
-    "requests", "pystyle", "gspread", "oauth2client", "gtts"
-]
-
-# ✅ Gói pkg cần cài trên Termux
-TERMUX_PACKAGES = ["mpv"]
-
-def install_libraries():
-    print(Fore.CYAN + "📦 Đang cài đặt các thư viện qua pip...")
-    for lib in REQUIRED_PACKAGES:
-        print(Fore.BLUE + f"🔄 Cài pip: {lib}...")
+# Cài các thư viện Python
+def install_pip_libs():
+    libs = ["colorama", "requests", "pystyle", "gspread", "oauth2client", "gtts"]
+    print(Fore.CYAN + "📦 Cài thư viện pip...")
+    for lib in libs:
+        print(Fore.BLUE + f"🔄 pip install: {lib}")
         subprocess.run([sys.executable, "-m", "pip", "install", "--upgrade", lib], check=True)
-    print(Fore.GREEN + "✅ Các thư viện pip đã cài xong.")
+    print(Fore.GREEN + "✅ Đã cài xong thư viện pip.")
 
+# Cài các gói pkg (chỉ dành cho Termux)
 def install_termux_packages():
-    if "Android" in platform.uname().release or "termux" in sys.executable.lower():
-        print(Fore.CYAN + "📦 Đang cài các gói cần thiết qua pkg...")
-        for pkg in TERMUX_PACKAGES:
-            print(Fore.BLUE + f"🔄 Cài pkg: {pkg}...")
-            subprocess.run(["pkg", "install", "-y", pkg], check=True)
-        print(Fore.GREEN + "✅ Các gói pkg đã cài xong.")
+    pkgs = ["mpv"]
+    print(Fore.CYAN + "📦 Cài gói pkg...")
+    subprocess.run(["pkg", "update", "-y"])
+    subprocess.run(["pkg", "upgrade", "-y"])
+    for pkg in pkgs:
+        print(Fore.BLUE + f"🔄 pkg install: {pkg}")
+        subprocess.run(["pkg", "install", "-y", pkg])
+    print(Fore.GREEN + "✅ Đã cài xong gói pkg.")
 
 if __name__ == "__main__":
-    install_libraries()
+    ensure_pip()
+    install_pip_libs()
     install_termux_packages()
-    print(Fore.MAGENTA + "🎉 Setup hoàn tất!")
-    sys.exit()
+    print(Fore.MAGENTA + "🎉 Hoàn tất setup!")
