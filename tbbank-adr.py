@@ -11,6 +11,8 @@ from datetime import datetime, timedelta
 from pystyle import Colors, Colorate
 import os
 import platform
+import subprocess
+
 
 # --- Hàm xóa sạch màn hình trên mọi thiết bị ---
 def clear_screen():
