@@ -9,9 +9,7 @@ import requests
 from time import sleep
 from datetime import datetime
 from playsound import playsound
-from pystyle import Colors, Colorate
 import platform
-import pygame  # Thêm dòng này để nhập khẩu pygame
 
 # --- Hàm xóa màn hình ---
 def clear_screen():
@@ -53,21 +51,30 @@ banner()
 # --- Phát âm thanh từ URL ---
 def play_sound_from_url(url):
     try:
-        # Tải âm thanh từ URL
+        # Tải file âm thanh từ URL
         response = requests.get(url)
-        audio_data = BytesIO(response.content)
         
-        # Khởi tạo pygame mixer và phát âm thanh
-        pygame.mixer.init()
-        pygame.mixer.music.load(audio_data)
-        pygame.mixer.music.play()
+        # Kiểm tra nếu tải thành công
+        if response.status_code == 200:
+            # Lưu âm thanh vào tệp tạm thời
+            temp_filename = "temp_sound.mp3"
+            with open(temp_filename, "wb") as f:
+                f.write(response.content)
+
+            # Phát âm thanh từ tệp tạm
+            playsound(temp_filename)
+
+            # Xóa tệp tạm sau khi phát xong
+            os.remove(temp_filename)
+        else:
+            print(f"❌ Không thể tải âm thanh. Mã lỗi: {response.status_code}")
     except Exception as e:
-        print(f"❌ Lỗi phát âm thanh: {e}")
+        print(f"❌ Lỗi khi tải và phát âm thanh: {e}")
 
 # --- TTS ---
 def noi(text, time_str, so_tien, noidung):
     try:
-        # Phát tiếng ting từ URL
+        # Phát tiếng ting
         play_sound_from_url("https://tiengdong.com/wp-content/uploads/Tieng-tinh-tinh-www_tiengdong_com.mp3")
 
         # Tạo file tạm TTS
