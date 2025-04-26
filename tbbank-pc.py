@@ -106,20 +106,28 @@ print("🔄 Đang theo dõi giao dịch mới...")
 # --- Theo dõi ---
 while True:
     try:
+        # Lấy tất cả dữ liệu trong bảng
         rows = sheet.get_all_records(head=2)
+        latest_transaction = None
+
+        # Duyệt qua tất cả các giao dịch và tìm giao dịch "Giao dịch đến" thành công gần nhất
         for row in reversed(rows):
             if row.get("Loại GD") == "Giao dịch đến" and row.get("Trạng thái") == "Thành công":
-                ma_gd = row.get("Mã giao dịch")
-                time_gd = row.get("Thời gian tạo")
-                noidung = row.get("Nội dung")
-                so_tien = row.get("Số tiền (VND)")
+                latest_transaction = row
+                break  # Dừng lại khi tìm thấy giao dịch đầu tiên thỏa mãn
 
-                if ma_gd != last_ma:
-                    noi("Thông báo", time_gd, so_tien, noidung)
-                    last_ma = ma_gd
-                    with open("LAMDev.txt", "w") as f:
-                        f.write(ma_gd)
-                    break
+        if latest_transaction:
+            ma_gd = latest_transaction.get("Mã giao dịch")
+            time_gd = latest_transaction.get("Thời gian tạo")
+            noidung = latest_transaction.get("Nội dung")
+            so_tien = latest_transaction.get("Số tiền (VND)")
+
+            if ma_gd != last_ma:
+                noi("Thông báo", time_gd, so_tien, noidung)
+                last_ma = ma_gd
+                with open("LAMDev.txt", "w") as f:
+                    f.write(ma_gd)
+
         time.sleep(3)
     except Exception as e:
         print("❌ Lỗi khi kiểm tra Sheet:", e)
