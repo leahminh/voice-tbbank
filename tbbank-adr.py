@@ -150,8 +150,11 @@ def banner():
 banner()
 
 # Hàm phát âm thanh từ link
+
+# Hàm phát âm thanh từ link và lưu log vào tệp
 def play_sound_from_url(url):
     os.system(f"mpv --no-video {url}")
+
 
 # Hàm đọc thông tin thời gian giao dịch và số tiền
 def noi(text, transaction_time, so_tien):
