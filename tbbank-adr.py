@@ -150,11 +150,8 @@ def banner():
 banner()
 
 # Hàm phát âm thanh từ link
-
-# Hàm phát âm thanh từ link và lưu log vào tệp
 def play_sound_from_url(url):
     os.system(f"mpv --no-video {url}")
-
 
 # Hàm đọc thông tin thời gian giao dịch và số tiền
 def noi(text, transaction_time, so_tien):
@@ -163,7 +160,7 @@ def noi(text, transaction_time, so_tien):
         play_sound_from_url("https://tiengdong.com/wp-content/uploads/Tieng-tinh-tinh-www_tiengdong_com.mp3")
 
         # Chờ 1 giây
-        time.sleep(0.001)
+        time.sleep(0.000001)
 
         # Lấy giờ và phút từ thời gian
         if transaction_time:
@@ -176,7 +173,7 @@ def noi(text, transaction_time, so_tien):
             time_msg = "Thời gian không xác định"
 
         # TTS - Thông báo "Giao dịch thành công, bạn đã nhận [so_tien] đồng vào [time_msg]"
-        message = f"Giao dịch thành công, Đã nhận {so_tien} đồng vào lúc {time_msg}, nội dung {noidung}"
+        message = f"Giao dịch thành công, Đã nhận {so_tien} đồng vào lúc {time_msg}"
         tts = gTTS(text=message, lang='vi')
         mp3_fp = BytesIO()
         tts.write_to_fp(mp3_fp)
@@ -219,13 +216,14 @@ while True:
                 ma_gd = row.get('Mã giao dịch')
                 transaction_time = row.get('Thời gian tạo')  # Lấy thời gian giao dịch từ cột 'Thời Gian Tạo'
                 noidung = row.get('Nội dung')  # Lấy thời gian giao dịch từ cột 'Thời Gian Tạo'
+                taikhoan = row.get('Tài khoản nhận')  # Lấy tài khoản từ cột 'Tài khoản nhận'
                 if ma_gd and ma_gd != last_ma_gd:
                     so_tien = row.get('Số tiền (VND)')
                     if transaction_time:
                         noi("Giao dịch thành công", transaction_time, so_tien)  # Truyền thời gian vào hàm
                     else:
                         print(f"❌ Thời gian không có giá trị cho giao dịch {ma_gd}.")
-                    print(f"✅ Giao dịch mới:\n- Mã Giao Dịch: {ma_gd}\n- {so_tien} VND\n- Thời gian: {transaction_time}\n- Nội Dung : {noidung}")
+                    print(f"{trang}-----------------------{reset}\n{xanh_la}✅ Giao dịch đến mới:\n{vang}- STK - Ngân Hàng Nhận: {taikhoan}\n- Mã Giao Dịch: {ma_gd}\n- Số tiền: {so_tien} VND\n- Thời gian: {transaction_time}\n- Nội Dung : {noidung}")
                     last_ma_gd = ma_gd
 
                     # Lưu mã giao dịch mới vào file
