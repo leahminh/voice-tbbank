@@ -131,25 +131,19 @@ while True:
     try:
         data = sheet.get_all_records(head=2)  # Dòng tiêu đề là dòng 2
         for row in reversed(data):
-            if row.get('Loại GD') == 'Giao dịch đến' and row.get('Trạng thái') == 'Thành công':
-                ma_gd = row.get('Mã giao dịch')
-                transaction_time = row.get('Thời gian tạo')  # Lấy thời gian giao dịch từ cột 'Thời Gian Tạo'
-                noidung = row.get('Nội dung')  # Lấy thời gian giao dịch từ cột 'Thời Gian Tạo'
+            if row[1] == 'Giao dịch đến' and row[2] == 'Thành công':  # Truy cập dữ liệu theo chỉ mục
+                ma_gd = row[0]  # Mã giao dịch
+                transaction_time = row[3]  # Thời gian giao dịch
+                noidung = row[4]  # Nội dung giao dịch
                 if ma_gd and ma_gd != last_ma_gd:
-                    so_tien = row.get('Số tiền (VND)')
+                    so_tien = row[5]  # Số tiền
                     if transaction_time:
-                        noi("Giao dịch thành công", transaction_time, so_tien)  # Truyền thời gian vào hàm
-                    else:
-                        print(f"❌ Thời gian không có giá trị cho giao dịch {ma_gd}.")
-                    print(f"✅ Giao dịch mới:\n- Mã Giao Dịch: {ma_gd}\n- {so_tien} VND\n- Thời gian: {transaction_time}\n- Nội Dung : {noidung}")
-                    last_ma_gd = ma_gd
+                        noi("Giao dịch thành công", transaction_time, so_tien)  # Truyền thông báo vào hàm
+                        last_ma_gd = ma_gd
+                        with open("LAMDev.txt", "w") as f:
+                            f.write(last_ma_gd)
 
-                    # Lưu mã giao dịch mới vào file
-                    with open("LAMDev.txt", "w") as f:
-                        f.write(ma_gd)
-                break
+        sleep(3)  # Chờ 3 giây để kiểm tra tiếp
     except Exception as e:
-        print("❌ Lỗi:", e)
-        time.sleep(10)  # Nếu có lỗi, chờ một chút rồi thử lại
-
-    time.sleep(5)  # Kiểm tra mỗi 5 giây
+        print(f"❌ Lỗi trong khi theo dõi: {e}")
+        sleep(5)
