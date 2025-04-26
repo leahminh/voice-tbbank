@@ -129,22 +129,27 @@ print("🔄 Đang theo dõi giao dịch mới...")
 # Vòng lặp kiểm tra
 while True:
     try:
-        # Lấy dữ liệu giao dịch gần nhất
-        row = sheet.row_values(2)  # Lấy dòng đầu tiên (giao dịch gần nhất)
-        if row:
-            ma_gd = row.get('Mã giao dịch')
-            transaction_time = row.get('Thời gian tạo')
-            noidung = row.get('Nội dung')
-            if ma_gd and ma_gd != last_ma_gd:
-                so_tien = row.get('Số tiền (VND)')
-                if transaction_time:
-                    noi("Giao dịch thành công", transaction_time, so_tien)
-                last_ma_gd = ma_gd
-                with open("LAMDev.txt", "w") as f:
-                    f.write(ma_gd)
-                print(f"✅ Giao dịch mới:\n- Mã Giao Dịch: {ma_gd}\n- {so_tien} VND\n- Thời gian: {transaction_time}\n- Nội Dung: {noidung}")
+        data = sheet.get_all_records(head=2)  # Dòng tiêu đề là dòng 2
+        for row in reversed(data):
+            if row.get('Loại GD') == 'Giao dịch đến' and row.get('Trạng thái') == 'Thành công':
+                ma_gd = row.get('Mã giao dịch')
+                transaction_time = row.get('Thời gian tạo')  # Lấy thời gian giao dịch từ cột 'Thời Gian Tạo'
+                noidung = row.get('Nội dung')  # Lấy thời gian giao dịch từ cột 'Thời Gian Tạo'
+                if ma_gd and ma_gd != last_ma_gd:
+                    so_tien = row.get('Số tiền (VND)')
+                    if transaction_time:
+                        noi("Giao dịch thành công", transaction_time, so_tien)  # Truyền thời gian vào hàm
+                    else:
+                        print(f"❌ Thời gian không có giá trị cho giao dịch {ma_gd}.")
+                    print(f"✅ Giao dịch mới:\n- Mã Giao Dịch: {ma_gd}\n- {so_tien} VND\n- Thời gian: {transaction_time}\n- Nội Dung : {noidung}")
+                    last_ma_gd = ma_gd
+
+                    # Lưu mã giao dịch mới vào file
+                    with open("LAMDev.txt", "w") as f:
+                        f.write(ma_gd)
+                break
     except Exception as e:
         print("❌ Lỗi:", e)
-        time.sleep(10)
+        time.sleep(10)  # Nếu có lỗi, chờ một chút rồi thử lại
 
     time.sleep(5)  # Kiểm tra mỗi 5 giây
