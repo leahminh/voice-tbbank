@@ -5,6 +5,17 @@ import requests
 from time import sleep
 from datetime import datetime, timedelta
 from pystyle import Colors, Colorate
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
+from gtts import gTTS
+from io import BytesIO
+import os
+import time
+import sys
+import requests
+from time import sleep
+from datetime import datetime, timedelta
+from playsound import playsound  # Thêm thư viện playsound
 # --- Hàm xóa sạch màn hình trên mọi thiết bị ---
 def clear_screen():
     try:
