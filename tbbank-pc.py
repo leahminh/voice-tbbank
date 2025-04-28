@@ -71,7 +71,7 @@ def check_connection():
         {tieng_xanh}║ {cam}BOX ZALO SUPPORT: {vang_cam}https://zalo.me/g/boiqoq426         {tieng_xanh}║
         {tieng_xanh}║ {cam}PROFILE ADMIN: {vang_cam}https://leanhminh.io.vn                {tieng_xanh}║
         {tieng_xanh}║ {cam}WEDSITE: {vang_cam}https://dichvusale.io.vn                     {tieng_xanh}║
-        {tieng_xanh}║ {cam}GIỚI HẠN THIẾT BỊ: {vang_cam}1 Thiết bị{cam}   KEY: {vang_cam}LAMDev**********{tieng_xanh} ║
+        {tieng_xanh}║ {cam}GIỚI HẠN THIẾT BỊ: {vang_cam}none      {cam}   KEY: {vang_cam}none            {tieng_xanh} ║
         {tieng_xanh}╚═══════════════════════════════════════════════════════╝
         
         {tieng_xanh}╔═══════════════════════════════════════════════════════╗
@@ -82,7 +82,7 @@ def check_connection():
             for x in b:
                 sys.stdout.write(x)
                 sys.stdout.flush()
-                sleep(0.000012)
+                sleep(0)
 
         banner()
         sys.exit()  # Dừng chương trình nếu không có mạng
@@ -131,7 +131,7 @@ def banner():
     for x in b:
         sys.stdout.write(x)
         sys.stdout.flush()
-        sleep(0.000012)
+        sleep(0)
 
 banner()
 
@@ -227,6 +227,6 @@ while True:
                 break
     except Exception as e:
         print("{do}❌ Lỗi:", e)
-        time.sleep(10)  # Nếu có lỗi, chờ một chút rồi thử lại
+        time.sleep(2)  # Nếu có lỗi, chờ một chút rồi thử lại
 
-    time.sleep(5)  # Kiểm tra mỗi 5 giây
+    time.sleep(2)  # Kiểm tra mỗi 5 giây
