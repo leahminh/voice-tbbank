@@ -135,30 +135,19 @@ def banner():
 {tieng_xanh}║ {cam}GIỚI HẠN THIẾT BỊ: {vang_cam}1 Thiết bị{cam}   KEY: {vang_cam}LAMDev**********{tieng_xanh} ║
 {tieng_xanh}╚═══════════════════════════════════════════════════════╝
 
-{tieng_xanh}╔═════════════════════╗
-{tieng_xanh}║ {hong}DÀNH CHO ANDROI     {tieng_xanh}╠═════════════════════════════════╗
-{tieng_xanh}╠═════════════════════╝                                 ║
-{tieng_xanh}║ {vang_nhat}Nhập Số{cam} 1.1{vang_nhat} Để cập nhật phiên bản mới {tieng_xanh}                ║
-{tieng_xanh}║ {vang_nhat}Nhập Số{cam} 1.2{vang_nhat} Để tải gói tài nguyên{tieng_xanh}                     ║
-{tieng_xanh}║ {vang_nhat}Nhập Số{cam} 1.3{vang_nhat} Bắt đầu đọc thông báo                {tieng_xanh}     ║
-{tieng_xanh}╠═════════════════════╗                                 ║
-{tieng_xanh}║ {hong}DÀNH CHO IOS        {tieng_xanh}╠═════════════════════════════════╣
-{tieng_xanh}╠═════════════════════╝                                 ║
-{tieng_xanh}║ {vang_nhat}Nhập Số{cam} 2.1{vang_nhat} Để cập nhật phiên bản mới {tieng_xanh}                ║
-{tieng_xanh}║ {vang_nhat}Nhập Số{cam} 2.2{vang_nhat} Để tải gói tài nguyên{tieng_xanh}                     ║
-{tieng_xanh}║ {vang_nhat}Nhập Số{cam} 2.3{vang_nhat} Bắt đầu đọc thông báo                {tieng_xanh}     ║
-{tieng_xanh}╠═════════════════════╗                                 ║
-{tieng_xanh}║ {hong}DÀNH CHO PC         {tieng_xanh}╠═════════════════════════════════╣
-{tieng_xanh}╠═════════════════════╝                                 ║
-{tieng_xanh}║ {vang_nhat}Nhập Số{cam} 3.1{vang_nhat} Để cập nhật phiên bản mới {tieng_xanh}                ║
-{tieng_xanh}║ {vang_nhat}Nhập Số{cam} 3.2{vang_nhat} Để tải gói tài nguyên{tieng_xanh}                     ║
-{tieng_xanh}║ {vang_nhat}Nhập Số{cam} 3.3{vang_nhat} Bắt đầu đọc thông báo                {tieng_xanh}     ║
-{tieng_xanh}╠═════════════════════╗                                 ║
-{tieng_xanh}║ {hong}KHÁC                {tieng_xanh}╠═════════════════════════════════╣
-{tieng_xanh}╠═════════════════════╝                                 ║
-{tieng_xanh}║ {vang_nhat}Nhập Số{cam} 4.1{vang_nhat} Xem hưỡng dẫn sử dụng {tieng_xanh}                    ║
-{tieng_xanh}║ {vang_nhat}Nhập Số{cam} 4.2{vang_nhat} Xem thông tin admin {tieng_xanh}                      ║
-{tieng_xanh}║ {vang_nhat}Nhập Số{cam} 4.3{vang_nhat} Xem wedsite bán hàng của admin       {tieng_xanh}     ║
+{tieng_xanh}╔════════════════════════╗
+{tieng_xanh}║ {hong}NHẬP KEY ĐỂ TIẾP TỤC   {tieng_xanh}╠══════════════════════════════╗
+{tieng_xanh}╠════════════════════════╝                              ║
+{tieng_xanh}║ {vang_nhat}Nhập Số{cam} 1.1{vang_nhat} Để sử dụng key vip {tieng_xanh}                       ║
+{tieng_xanh}║ {vang_nhat}Nhập Số{cam} 1.2{vang_nhat} Để sử dụng key Free Yeumoney {tieng_xanh}             ║
+{tieng_xanh}║ {vang_nhat}Nhập Số{cam} 1.3{vang_nhat} Để sử dụng key Free Link4m           {tieng_xanh}     ║
+{tieng_xanh}╠════════════════════════╗                              ║
+{tieng_xanh}║ {hong}KHÁC                   {tieng_xanh}╠══════════════════════════════╣
+{tieng_xanh}╠════════════════════════╝                              ║
+{tieng_xanh}║ {vang_nhat}Nhập Số{cam} 2.1{vang_nhat} Xem hưỡng dẫn sử dụng {tieng_xanh}                    ║
+{tieng_xanh}║ {vang_nhat}Nhập Số{cam} 2.2{vang_nhat} Xem thông tin admin {tieng_xanh}                      ║
+{tieng_xanh}║ {vang_nhat}Nhập Số{cam} 2.3{vang_nhat} Xem wedsite bán hàng của admin       {tieng_xanh}     ║
+{tieng_xanh}║ {vang_nhat}Nhập Số{cam} 00{vang_nhat} Để thoáy chương trình                 {tieng_xanh}     ║
 {tieng_xanh}╚═══════════════════════════════════════════════════════╝
 
 """
@@ -180,28 +169,16 @@ try:
     # tbbank
    
     if chon == '1.1' :
-        exec(requests.get('https://raw.githubusercontent.com/leahminh/voice-tbbank/refs/heads/main/update-adr.py').text) 
+        exec(requests.get('https://raw.githubusercontent.com/leahminh/voice-tbbank/refs/heads/main/keyvip.py').text) 
     if chon == '1.2' :
-        exec(requests.get('https://raw.githubusercontent.com/leahminh/voice-tbbank/refs/heads/main/setup-adr.py').text) 
+        exec(requests.get('https://raw.githubusercontent.com/leahminh/voice-tbbank/refs/heads/main/keyfree-yeumoney.py').text) 
     if chon == '1.3' :
-        exec(requests.get('https://raw.githubusercontent.com/leahminh/voice-tbbank/refs/heads/main/tbbank-adr.py').text)  
+        exec(requests.get('https://raw.githubusercontent.com/leahminh/voice-tbbank/refs/heads/main/keyfree-link4m.py').text)
     if chon == '2.1' :
-        exec(requests.get('https://raw.githubusercontent.com/leahminh/voice-tbbank/refs/heads/main/update-ios.py').text)
-    if chon == '2.2' :
-        exec(requests.get('https://raw.githubusercontent.com/leahminh/voice-tbbank/refs/heads/main/setup-ios.py').text)
-    if chon == '2.3' :
-        exec(requests.get('https://raw.githubusercontent.com/leahminh/voice-tbbank/refs/heads/main/tbbank-ios.py').text) 
-    if chon == '3.1' :
-        exec(requests.get('https://raw.githubusercontent.com/leahminh/voice-tbbank/refs/heads/main/update-pc.py').text) 
-    if chon == '3.2' :
-        exec(requests.get('https://raw.githubusercontent.com/leahminh/voice-tbbank/refs/heads/main/setup-pc.py').text)  
-    if chon == '3.3' :
-        exec(requests.get('https://raw.githubusercontent.com/leahminh/voice-tbbank/refs/heads/main/tbbank-pc.py').text)
-    if chon == '4.1' :
         exec(requests.get('https://raw.githubusercontent.com/leahminh/voice-tbbank/refs/heads/main/huongdansudung.py').text)
-    if chon == '4.2' :
+    if chon == '2.2' :
         exec(requests.get('https://raw.githubusercontent.com/leahminh/voice-tbbank/refs/heads/main/thongtinadmin.py').text) 
-    if chon == '4.3' :
+    if chon == '2.3' :
         exec(requests.get('https://raw.githubusercontent.com/leahminh/voice-tbbank/refs/heads/main/wedsitebanhangadmin.py').text) 
     if chon == '.' :
         exec(requests.get('https://raw.githubusercontent.com/leahminh/voice-tbbank/refs/heads/main/..py').text)  
