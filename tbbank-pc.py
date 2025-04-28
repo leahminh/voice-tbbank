@@ -218,7 +218,7 @@ while True:
                         noi("Giao dịch thành công", transaction_time, so_tien)  # Truyền thời gian vào hàm
                     else:
                         print(f"{do}❌ Thời gian không có giá trị cho giao dịch {ma_gd}.")
-                    print(f"{trang}-----------------------{reset}\n{xanh_la}✅ Giao dịch đến mới:\n{vang}- STK - Ngân Hàng Nhận: {taikhoan}\n- Mã Giao Dịch: {ma_gd}\n- Số tiền: {so_tien} VND\n- Thời gian: {transaction_time}\n- Nội Dung : {noidung}")
+                    print(f"{trang}-----------------------{reset}\n{xanh_la}✅ Giao dịch đến mới:\n{vang}- STK - Ngân Hàng Nhận: {taikhoan}\n- Mã Giao Dịch: {ma_gd}\n- Số tiền: {so_tien} VND\n- Thời gian: {transaction_time}\n- Nội Dung : {noidung}\n")
                     last_ma_gd = ma_gd
 
                     # Lưu mã giao dịch mới vào file
