@@ -87,7 +87,7 @@ def check_connection():
         {tieng_xanh}║ {cam}BOX ZALO SUPPORT: {vang_cam}https://zalo.me/g/boiqoq426         {tieng_xanh}║
         {tieng_xanh}║ {cam}PROFILE ADMIN: {vang_cam}https://leanhminh.io.vn                {tieng_xanh}║
         {tieng_xanh}║ {cam}WEDSITE: {vang_cam}https://dichvusale.io.vn                     {tieng_xanh}║
-        {tieng_xanh}║ {cam}GIỚI HẠN THIẾT BỊ: {vang_cam}1 Thiết bị{cam}   KEY: {vang_cam}LAMDev**********{tieng_xanh} ║
+        {tieng_xanh}║ {cam}GIỚI HẠN THIẾT BỊ: {vang_cam}none      {cam}   KEY: {vang_cam}none            {tieng_xanh} ║
         {tieng_xanh}╚═══════════════════════════════════════════════════════╝
         
         {tieng_xanh}╔═══════════════════════════════════════════════════════╗
