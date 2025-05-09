@@ -14,7 +14,6 @@ import sys
 import requests
 from time import sleep
 from datetime import datetime, timedelta
-from playsound import playsound  # Thêm thư viện playsound
 
 
 # Ma mau ANSI
